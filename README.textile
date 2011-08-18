@@ -105,7 +105,7 @@ from collections import UserDict
 assert isinstance(UserDict(), IDictionary)</code></pre>
 
 
-h3(#declaring). Declaring an Interface
+h3(#declaring). %3.1.% Declaring an Interface
 
 To declare an interface create a new class which derives from @Interface@ or another @Interface@ subclass and utilize the declarative schema objects.  For example:
 
@@ -120,6 +120,61 @@ class IDictionary(Interface):
     get = Method(args=2, optional=1)</code></pre>
 
 The @__assume_interface__@ attribute of an @Interface@ allows you to define an interface that accepts built-in types that can not be introspected.
+
+
+h3(#api). %3.2.% Schema
+
+The following schema classes are available.
+
+h4(#api-attribute). %3.2.1.% Attribute
+
+This is the base class for all schema objects and accepts a basic set of validation options.  This simply ensures that the attribute exists and matches the optional initializer arguments.
+
+table(arguments).
+|_. Argument |_. Description |
+| @doc=None@ | Docstring for this attribute. This is the only argument that can be passed positionally. |
+| @value=NoDefault@ | Compare the value of the attribute when checking the interface. |
+| @exact=NoDefault@ | Compare the identity (using @is@) of the attribute. |
+| @validator=None@ | A callback, accepting the value to be checked as the only argument, that returns @True@ if valid, @False@ otherwise. |
+
+These validation options may seem odd, but they allow you to programatically verify state machines (or state in general) using interfaces; an unintentional feature we think is kinda neat.
+
+h4(#api-property). %3.2.2.% Property(Attribute)
+
+This extends the Attribute checks to include typecasting information, accepting the following additional argument:
+
+table(arguments).
+|_. Argument |_. Description |
+| @type=None@ | The type to check against via @isinstance@. |
+
+Additionally there are two subclasses of Property that accept no additional arguments:
+
+table(classes).
+|_. Argument |_. Description |
+| @ClassProperty@ | Ensure the property is defined at the class level and not overridden in the instance. |
+| @InstanceProperty@ | The inverse of the above; ensure this value is set or overridden in the instance. |
+
+h4(#api-callable). %3.2.3.% Callable(Attribute)
+
+This schema class validates the argument specification of a callable.
+
+table(arguments).
+|_. Argument |_. Description |
+| @like=None@ | Copy the argument specification from another callable. |
+| @args=None@ | The number of positional arguments.  Absolute; there can be no more and no fewer. |
+| @optional=None@ | The number of optional positional arguments.  There may be more. |
+| @names=None@ | The names of required keyword arguments.  There may be others. |
+| @vargs=None@ | If @True@, enforces the acceptance of unlimited positional arguments. |
+| @kwargs=None@ | If @True@, enforces the acceptance of unlimited keyword arguments. |
+
+Additionally there are three subclasses of Callable that accept no additional arguments:
+
+table(classes).
+|_. Argument |_. Description |
+| @Method@ | Ensure the callable is a true class method, e.g. not a lambda or plain function. |
+| @ClassMethod@ | A method defined using teh @classmethod@ decorator. |
+| @StaticMethod@ | A method defined using the @staticmethod@ decorator. |
+
 
 
 h2(#license). %8.% License
