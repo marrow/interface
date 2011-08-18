@@ -55,13 +55,9 @@ class InterfaceMeta(type):
         return cls.implements(inst)
     
     def implements(interface, instance):
-        try:
-            for i, j in interface.__abstract__.items():
-                j(instance)
-        
-        except TypeError:
-            raise
-            return False
+        for i, j in interface.__abstract__.items():
+            if not j(instance):
+                return False
         
         return True
 
