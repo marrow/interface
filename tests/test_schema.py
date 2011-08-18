@@ -328,6 +328,3 @@ class TestStaticMethod(TestCase, BaseCallables):
     
     def test_static_method_parent_failure(self):
         self.assertEqual(self.invalid(self), False)
-
-# self.assertEqual(a.Manager, ImmediateManager)
-# self.assertRaises(LookupError, lambda: Delivery(config))
