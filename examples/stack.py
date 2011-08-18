@@ -1,8 +1,8 @@
 # encoding: utf-8
 
 
-from marrow.interface.core import Interface
-from marrow.interface.declaration import Method
+from marrow.interface import Interface
+from marrow.interface.schema import Method
 
 
 class IStack(Interface):

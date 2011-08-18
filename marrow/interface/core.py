@@ -2,7 +2,7 @@
 
 import inspect
 
-from marrow.interface.declaration import Attribute
+from marrow.interface.schema import Attribute
 
 
 __all__ = ['InterfaceMeta', 'Interface']
