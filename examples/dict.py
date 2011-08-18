@@ -1,9 +1,16 @@
 # encoding: utf-8
 
-import UserDict
-
 from marrow.interface import Interface
 from marrow.interface.schema import Method
+
+try:
+    from collections import UserDict
+
+except ImportError:
+    from UserDict import UserDict
+
+
+__all__ = ['IDictionary']
 
 
 class IDictionary(Interface):
@@ -17,5 +24,5 @@ class IDictionary(Interface):
 assert isinstance(dict, IDictionary)
 assert isinstance(dict(), IDictionary)
 
-assert isinstance(UserDict.UserDict, IDictionary)
-assert isinstance(UserDict.UserDict(), IDictionary)
+assert isinstance(UserDict, IDictionary)
+assert isinstance(UserDict(), IDictionary)
