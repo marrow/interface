@@ -99,10 +99,10 @@ The use of Marrow Interface requires no support on the part of the producer; obj
 
 To check an interface, simply use @isinstance@ a la:
 
-<pre><code>from marrow.interface.interfaces import IDictionary
+<pre><code>from marrow.interface.base import IMapping
 from collections import UserDict
  
-assert isinstance(UserDict(), IDictionary)</code></pre>
+assert isinstance(UserDict(), IMapping)</code></pre>
 
 
 h3(#declaring). %3.1.% Declaring an Interface
@@ -112,12 +112,11 @@ To declare an interface create a new class which derives from @Interface@ or ano
 <pre><code>from marrow.interface import Interface
 from marrow.interface.schema import Method
  
-class IDictionary(Interface):
+class IMapping(Interface):
     __assume_interface__ = (dict,)
     __getitem__ = Method(args=1)
     __setitem__ = Method(args=2)
-    __delitem__ = Method(args=1)
-    get = Method(args=2, optional=1)</code></pre>
+    __delitem__ = Method(args=1)</code></pre>
 
 The @__assume_interface__@ attribute of an @Interface@ allows you to define an interface that accepts built-in types that can not be introspected.
 
