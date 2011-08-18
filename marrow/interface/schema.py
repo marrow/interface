@@ -90,7 +90,7 @@ class Callable(Attribute):
             names = list(defaults)
         
         self.args = args
-        self.optional = set(optional) if optional else None
+        self.optional = optional
         self.names = set(names) if names else None
         self.vargs = vargs
         self.kwargs = kwargs
@@ -101,13 +101,19 @@ class Callable(Attribute):
         
         names, vargs, kwargs, defaults = inspect.getargspec(value)
         
+        if not names:
+            names = []
+        
+        if not defaults:
+            defaults = dict()
+        
         del names[:self.skip]
         
-        if ( self.args is not None and len(names) < self.args ) or \
+        if ( self.args is not None and (len(names) - len(defaults)) != self.args ) or \
            ( self.names and not set(names) & self.names == self.names ) or \
            ( self.vargs and not vargs ) or \
            ( self.kwargs and not kwargs ) or \
-           ( self.optional is not None and ( not defaults or len(defaults) < self.optional ) ):
+           ( self.optional is not None and len(defaults) != self.optional ):
             return
         
         return True
