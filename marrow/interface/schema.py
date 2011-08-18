@@ -128,7 +128,7 @@ class Method(Callable):
     
     def check(self, instance, value):
         if not super(Method, self).check(instance, value) or \
-           not inspect.ismethod(value):
+           ( not inspect.isclass(instance) and not inspect.ismethod(value) ):
             return
         
         return True
