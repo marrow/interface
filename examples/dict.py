@@ -10,7 +10,7 @@ class IDictionary(Interface):
     __assume_interface__ = (dict, )
     
     __getitem__ = Method(args=1)
-    __setitem__ = Method(args=0)
+    __setitem__ = Method(args=2)
     __delitem__ = Method(args=1)
 
 

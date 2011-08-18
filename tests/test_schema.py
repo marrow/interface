@@ -31,16 +31,16 @@ class TestAttributeSuccesses(TestCase):
         self.assertEqual(self.basic.__doc__, "basic attribute")
     
     def test_basic_call(self):
-        self.assertEqual(self.basic(self), True)
+        self.assertTrue(self.basic(self))
     
     def test_value_call(self):
-        self.assertEqual(self.value(self), True)
+        self.assertTrue(self.value(self))
     
     def test_exact_call(self):
-        self.assertEqual(self.exact(self), True)
+        self.assertTrue(self.exact(self))
     
     def test_validator_call(self):
-        self.assertEqual(self.validator(self), True)
+        self.assertTrue(self.validator(self))
 
 
 class TestAttributeFailure(TestCase):
@@ -60,16 +60,16 @@ class TestAttributeFailure(TestCase):
     validator.name = 'foo'
     
     def test_basic_call(self):
-        self.assertEqual(self.basic(self), False)
+        self.assertFalse(self.basic(self))
     
     def test_value_call(self):
-        self.assertEqual(self.value(self), False)
+        self.assertFalse(self.value(self))
     
     def test_exact_call(self):
-        self.assertEqual(self.exact(self), False)
+        self.assertFalse(self.exact(self))
     
     def test_validator_call(self):
-        self.assertEqual(self.validator(self), False)
+        self.assertFalse(self.validator(self))
 
 
 class TestProperty(TestCase):
@@ -83,10 +83,10 @@ class TestProperty(TestCase):
     bad.name = 'bar'
     
     def test_property_success(self):
-        self.assertEqual(self.good(self), True)
+        self.assertTrue(self.good(self))
     
     def test_property_failure(self):
-        self.assertEqual(self.bad(self), False)
+        self.assertFalse(self.bad(self))
 
 
 class TestClassProperty(TestCase):
@@ -103,10 +103,10 @@ class TestClassProperty(TestCase):
         self.bar = 42
     
     def test_class_property_success(self):
-        self.assertEqual(self.good(self), True)
+        self.assertTrue(self.good(self))
     
     def test_class_property_failure(self):
-        self.assertEqual(self.bad(self), False)
+        self.assertFalse(self.bad(self))
 
 
 class TestInstanceProperty(TestCase):
@@ -128,13 +128,13 @@ class TestInstanceProperty(TestCase):
         self.baz = 42
     
     def test_instance_property_override_success(self):
-        self.assertEqual(self.good1(self), True)
+        self.assertTrue(self.good1(self))
     
     def test_instance_property_unique_success(self):
-        self.assertEqual(self.good2(self), True)
+        self.assertTrue(self.good2(self))
     
     def test_instance_property_failure(self):
-        self.assertEqual(self.bad(self), False)
+        self.assertFalse(self.bad(self))
 
 
 class BaseCallables(object):
@@ -165,13 +165,13 @@ class TestCallableBasics(TestCase, BaseCallables):
     error.name = '__getitem__'
     
     def test_callable_base_success(self):
-        self.assertEqual(self.good(self), True)
+        self.assertTrue(self.good(self))
     
     def test_callable_base_failure(self):
-        self.assertEqual(self.bad(self), False)
+        self.assertFalse(self.bad(self))
     
     def test_callable_introspect_fail(self):
-        self.assertEqual(self.error(self.dictionary), False)
+        self.assertFalse(self.error(self.dictionary))
 
 
 class TestCallableArgspecSuccess(TestCase, BaseCallables):
@@ -198,28 +198,28 @@ class TestCallableArgspecSuccess(TestCase, BaseCallables):
     like_override.name = 'callable1'
     
     def test_callable_args(self):
-        self.assertEqual(self.args(self), True)
+        self.assertTrue(self.args(self))
     
     def test_callable_optional(self):
-        self.assertEqual(self.optional(self), True)
+        self.assertTrue(self.optional(self))
     
     def test_callable_names(self):
-        self.assertEqual(self.names(self), True)
+        self.assertTrue(self.names(self))
     
     def test_callable_vargs(self):
-        self.assertEqual(self.vargs(self), True)
+        self.assertTrue(self.vargs(self))
     
     def test_callable_kwargs(self):
-        self.assertEqual(self.kwargs(self), True)
+        self.assertTrue(self.kwargs(self))
     
     def test_callable_like_basic(self):
-        self.assertEqual(self.like_basic(self), True)
+        self.assertTrue(self.like_basic(self))
     
     def test_callable_like_variable(self):
-        self.assertEqual(self.like_variable(self), True)
+        self.assertTrue(self.like_variable(self))
     
     def test_callable_like_override(self):
-        self.assertEqual(self.like_override(self), True)
+        self.assertTrue(self.like_override(self))
 
 
 class TestCallableArgspecFailures(TestCase, BaseCallables):
@@ -243,25 +243,25 @@ class TestCallableArgspecFailures(TestCase, BaseCallables):
     like_variable.name = 'callable1'
     
     def test_callable_args(self):
-        self.assertEqual(self.args(self), False)
+        self.assertFalse(self.args(self))
     
     def test_callable_optional(self):
-        self.assertEqual(self.optional(self), False)
+        self.assertFalse(self.optional(self))
     
     def test_callable_names(self):
-        self.assertEqual(self.names(self), False)
+        self.assertFalse(self.names(self))
     
     def test_callable_vargs(self):
-        self.assertEqual(self.vargs(self), False)
+        self.assertFalse(self.vargs(self))
     
     def test_callable_kwargs(self):
-        self.assertEqual(self.kwargs(self), False)
+        self.assertFalse(self.kwargs(self))
     
     def test_callable_like_basic(self):
-        self.assertEqual(self.like_basic(self), False)
+        self.assertFalse(self.like_basic(self))
     
     def test_callable_like_variable(self):
-        self.assertEqual(self.like_variable(self), False)
+        self.assertFalse(self.like_variable(self))
 
 
 class TestMethod(TestCase, BaseCallables):
@@ -275,13 +275,13 @@ class TestMethod(TestCase, BaseCallables):
     bad.name = 'callable3'
     
     def test_method_success(self):
-        self.assertEqual(self.good1(self), True)
+        self.assertTrue(self.good1(self))
     
     def test_class_method_success(self):
-        self.assertEqual(self.good2(self), True)
+        self.assertTrue(self.good2(self))
     
     def test_method_failure(self):
-        self.assertEqual(self.bad(self), False)
+        self.assertFalse(self.bad(self))
 
 
 class TestClassMethod(TestCase, BaseCallables):
@@ -295,13 +295,13 @@ class TestClassMethod(TestCase, BaseCallables):
     bad2.name = 'callable3'
     
     def test_class_method_success(self):
-        self.assertEqual(self.good(self), True)
+        self.assertTrue(self.good(self))
     
     def test_method_failure(self):
-        self.assertEqual(self.bad1(self), False)
+        self.assertFalse(self.bad1(self))
     
     def test_static_method_failure(self):
-        self.assertEqual(self.bad2(self), False)
+        self.assertFalse(self.bad2(self))
 
 
 class TestStaticMethod(TestCase, BaseCallables):
@@ -318,13 +318,13 @@ class TestStaticMethod(TestCase, BaseCallables):
     invalid.name = 'callable3'
     
     def test_static_method_success(self):
-        self.assertEqual(self.good(self), True)
+        self.assertTrue(self.good(self))
     
     def test_method_failure(self):
-        self.assertEqual(self.bad1(self), False)
+        self.assertFalse(self.bad1(self))
     
     def test_class_method_failure(self):
-        self.assertEqual(self.bad2(self), False)
+        self.assertFalse(self.bad2(self))
     
     def test_static_method_parent_failure(self):
-        self.assertEqual(self.invalid(self), False)
+        self.assertFalse(self.invalid(self))

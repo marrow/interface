@@ -18,18 +18,6 @@ class InterfaceMeta(type):
         
         abstract = dict()
         
-        for base in bases:
-            if type(base) is not InterfaceMeta:
-                raise TypeError("Do not mix interfaces with other base classes.")
-            
-            collision = set(abstract) & set(base.__dict__['__abstract__'])
-            
-            if collision:
-                raise TypeError("Conflicting interfaces, %s redefines: %s" % (
-                        base.__name__, ', '.join(collision)))
-            
-            abstract.update(base.__dict__['__abstract__'])
-        
         for key in attrs:
             if key in ('__module__', '__assume_interface__'):
                 continue
@@ -44,6 +32,19 @@ class InterfaceMeta(type):
                 value.name = key
             
             abstract[key] = value
+        
+        for base in bases:
+            if type(base) is not InterfaceMeta:
+                raise TypeError("Do not mix interfaces with other base classes.")
+            
+            collision = set(abstract) & set(base.__dict__['__abstract__'])
+            print collision, set(abstract), set(base.__dict__['__abstract__'])
+            
+            if collision:
+                raise TypeError("Conflicting interfaces, %s redefines: %s" % (
+                        base.__name__, ', '.join(collision)))
+            
+            abstract.update(base.__dict__['__abstract__'])
         
         attrs['__abstract__'] = abstract
         
