@@ -35,7 +35,7 @@ class Attribute(object):
            ( self.exact is not NoDefault and value is not self.exact ) or \
            ( self.validator and not self.validator(value) ) or \
            ( not self.check(instance, value) ):
-            return
+            return False
         
         return True
     
@@ -52,7 +52,7 @@ class Property(Attribute):
     
     def check(self, instance, value):
         if not super(Property, self).check(instance, value) or \
-           self.type and not isinstance(value, self.type):
+           ( self.type and not isinstance(value, self.type) ):
             return
         
         return True
@@ -62,7 +62,7 @@ class ClassProperty(Property):
     def check(self, instance, value):
         if not super(ClassProperty, self).check(instance, value) or \
            self.name in instance.__dict__ or \
-           self.name not in (cls.__dict__ for cls in type(instance).mro()):
+           self.name not in (attr for cls in type(instance).mro() for attr in cls.__dict__):
             return
         
         return True
@@ -84,10 +84,10 @@ class Callable(Attribute):
         super(Callable, self).__init__(doc, **kw)
         
         if like:
-            names, vargs, kwargs, defaults = inspect.getargspec(like)
-            args = len(names) - self.skip
-            optional = optional or ( args - len(defaults) )
-            names = list(defaults)
+            names_, vargs, kwargs, defaults = inspect.getargspec(like)
+            optional = optional if optional else (len(defaults) if defaults else None)
+            args = args if args is not None and names is None else (len(names_) - self.skip - (optional if optional is not None else 0))
+            names = names if names is not None else names_[self.skip:]
         
         self.args = args
         self.optional = optional
@@ -96,24 +96,27 @@ class Callable(Attribute):
         self.kwargs = kwargs
     
     def check(self, instance, value):
-        if not super(Callable, self).check(instance, value):
+        if not super(Callable, self).check(instance, value) or \
+           not hasattr(value, '__call__'):
             return
         
-        names, vargs, kwargs, defaults = inspect.getargspec(value)
+        try:
+            names, vargs, kwargs, defaults = inspect.getargspec(value)
+        except:
+            return
         
         if not names:
             names = []
         
-        if not defaults:
-            defaults = dict()
+        optional = len(defaults) if defaults else 0
         
         del names[:self.skip]
         
-        if ( self.args is not None and (len(names) - len(defaults)) != self.args ) or \
+        if ( self.args is not None and (len(names) - optional) != self.args ) or \
            ( self.names and not set(names) & self.names == self.names ) or \
            ( self.vargs and not vargs ) or \
            ( self.kwargs and not kwargs ) or \
-           ( self.optional is not None and len(defaults) != self.optional ):
+           ( self.optional is not None and optional != self.optional ):
             return
         
         return True
@@ -145,11 +148,12 @@ class ClassMethod(Method):
 
 class StaticMethod(Callable):
     def check(self, instance, value):
-        mro = (instance if inspect.isclass(instance) else type(instance)).mro()
+        if not super(StaticMethod, self).check(instance, value):
+            return
         
-        for cls in mro:
+        for cls in (instance if inspect.isclass(instance) else type(instance)).mro():
             if self.name in cls.__dict__:
                 if type(cls.__dict__[self.name]) is staticmethod:
-                    return super(StaticMethod, self).check(instance, cls.__dict__[self.name])
+                    return True
                 
                 break
