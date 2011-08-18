@@ -73,7 +73,4 @@ class InterfaceMeta(type):
         return True
 
 
-class Interface(object):
-    __metaclass__ = InterfaceMeta
-    
-    pass
+Interface = InterfaceMeta("Interface", (object, ), dict())
