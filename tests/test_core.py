@@ -54,13 +54,9 @@ class TestInterface(TestCase):
 
 class TestExampleInterface(TestCase):
     def setUp(self):
-        class IDictlike(Interface):
-            __assume_interface__ = (dict, )
-            __getitem__ = schema.Method(args=1)
-            __setitem__ = schema.Method(args=2)
-            __delitem__ = schema.Method(args=1)
+        from marrow.interface.base import IMapping
         
-        self.interface = IDictlike
+        self.interface = IMapping
     
     def test_core_type_comparison(self):
         self.assertTrue(isinstance(dict, self.interface))
