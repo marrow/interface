@@ -38,7 +38,6 @@ class InterfaceMeta(type):
                 raise TypeError("Do not mix interfaces with other base classes.")
             
             collision = set(abstract) & set(base.__dict__['__abstract__'])
-            print collision, set(abstract), set(base.__dict__['__abstract__'])
             
             if collision:
                 raise TypeError("Conflicting interfaces, %s redefines: %s" % (
