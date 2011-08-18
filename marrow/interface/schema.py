@@ -139,14 +139,11 @@ class ClassMethod(Method):
 
 class StaticMethod(Callable):
     def check(self, instance, value):
-        if not super(StaticMethod, self).check(instance, value):
-            return
-        
         mro = (instance if inspect.isclass(instance) else type(instance)).mro()
         
         for cls in mro:
             if self.name in cls.__dict__:
                 if type(cls.__dict__[self.name]) is staticmethod:
-                    return True
+                    return super(StaticMethod, self).check(instance, cls.__dict__[self.name])
                 
                 break
