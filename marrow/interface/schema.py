@@ -2,15 +2,16 @@
 
 import inspect
 
-from marrow.util.object import NoDefault
-
-
 __all__ = [
         'Attribute',
         'Property', 'ClassProperty', 'InstanceProperty',
         'Method', 'ClassMethod', 'StaticMethod'
     ]
 
+
+
+class NoDefault(object):
+    pass
 
 
 class Attribute(object):
