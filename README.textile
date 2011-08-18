@@ -12,10 +12,53 @@ bq(byline). "https://github.com/marrow/marrow.interface":github-project
 
 h2(#what-is). %1.% What is Marrow Interface?
 
+Marrow Interface is a light-weight—less than 200 lines of code—flexible, declarative schema system for Python objects.  If you are familiar with Object Relational Mappers (ORMs) or Object Document Mappers (ODMs) then this style of system should already be familiar.
+
+Marrow Interface provides deep runtime checking of these objects using simple @isinstance@ calls.  It is encouraged to check these objects as early as possible in your application's lifespan; the best location, if possible, is during configuration or startup.  Additionally, if you are writing extensible software, plugins conforming to your API should not need to be aware of the literal interface at any time other than during unit test execution.
+
+An example of this dependency issue is for a template engine.  The template engine may want to have a helper that conforms to the API used by a web framework; using other solutions the template engine would need to require the web framework be installed to declare its support for that API.  This isn't very desirable.
+
+An additional issue is that of double-checking.  The double-check problem is that while an object may declare that it supports an interface, it can lie.  The consumer (code which uses the object) still has to check before using it, thus there is no benefit in declaring support for an interface up-front.  The cost for this is the aforementioned reverse dependancy which when combined with the double-check problem, is needless.
+
+Marrow Interface solves these problems by automating the introspection of an object needed to validate that it does, in fact, conform to a given API.
 
 
-h3(#goals). %1.1.% Why Avoid Duck Typing?
+h3(#duck-typing). %1.1.% Why Avoid Duck Typing?
 
+Duck typing—where if it walks like a duck (probably does what you expect it to do), talks like a duck (supports an implicit shared interface), it's probably a duck—is great for core Python APIs such as dictionary access.  This type of implicit API suffers from a small set of rather significant problems:
+
+* You can only confirm an object does what you want by trying it out.  This means you can't check things ahead of time, for example, during configuration versus first use.  This means errors can crop up in unexpected places far removed from the last place you had anything to do with a given object.
+* You have to handle all sorts of errors: @AttributeError@, @TypeError@, and possibly others like @ValueError@ and @NotImplementedError@.  This makes exception handling for exceptions you _expect_ a given API to generate more difficult, especially considering that raw except blocks (exception handlers that catch anything) are just as likely to eat real exceptions raised by bugs or incompatible data.
+
+Duck typing works great if there are no bugs.  There are always bugs.  It also works great if you can have 100% trust that an object will always be treated a certain way; this kind of trust can only be reliably given to the standard library.  To be truly safe and robust you have to assume everyone is lying to you.
+
+Most of the "rationale behind Abstract Base Classes":http://www.python.org/dev/peps/pep-3119/ applies here as well.
+
+As a rather off-colour analogy, consider this conversation:
+
+* Boyfriend: "We're going to have sex!"
+* Girlfriend: "No we're not."
+* Boyfriend: (hurt) "Oh."
+
+Duck typing replicates this conversation every time an attempt to use an object that does not conform to the specification is used.  It's abrupt, possibly rude, and would be a terrible way to brute-force a conversation in real life.
+
+
+h3(#abc). %1.2.% What About Abstract Base Classes or Zope Interface?
+
+Abstract Base Classes (ABCs) offer a registry in addition to subclass-based membership.  Because of this:
+
+* Objects which implement an interface must have knowledge of that ABC.  This sets up a reverse dependancy, which is problematical for reasons elaborated upon in the next section.
+* ABCs are themselves concrete classes.  They aren't truly abstract unlike the more strict definition used by C++ and Java.
+* You can potentially have metaclass conflicts when subclassing from parent classes with different metaclasses.
+* You do not avoid the double-check problem.
+
+To continue the analogy, consider this conversation:
+
+* Boyfriend: "I'd like to have sex!"
+* Girlfriend: "Could we have sex?"
+* Boyfriend: "I can do that."
+
+Zope Interface (@z.i@) suffers from all the same problems, except for the subclassing issue.  In @z.i@ you execute function calls at the class scope to _register_ your adherence to an interface.  Zope Interface also has a clear distinction between class-level implementation of a protocol, and objects which _provide_ the interface.
 
 
 
