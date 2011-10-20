@@ -7,6 +7,7 @@ from marrow.interface.schema import Attribute
 
 __all__ = ['InterfaceMeta', 'Interface']
 
+ALLOWED_PROPERTIES = ('__doc__', '__module__', '__assume_interface__')
 
 
 class InterfaceMeta(type):
@@ -19,7 +20,7 @@ class InterfaceMeta(type):
         abstract = dict()
         
         for key in attrs:
-            if key in ('__module__', '__assume_interface__'):
+            if key in ALLOWED_PROPERTIES:
                 continue
             
             value = attrs[key]
