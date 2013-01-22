@@ -73,7 +73,7 @@ If you add @marrow.interface@ to the @install_requires@ argument of the call to 
 
 h3(#install-dev). %2.1.% Development Version
 
-Development takes place on "GitHub":github in the "marrow.mailer":github-project project.  Issue tracking, documentation, and downloads are provided there.
+Development takes place on "GitHub":github in the "marrow.interface":github-project project.  Issue tracking, documentation, and downloads are provided there.
 
 Installing the current development version requires "Git":git, a distributed source code management system.  If you have Git, you can run the following to download and _link_ the development version into your Python runtime:
 
@@ -171,7 +171,7 @@ Additionally there are three subclasses of Callable that accept no additional ar
 table(classes).
 |_. Class |_. Description |
 | @Method@ | Ensure the callable is a true class method, e.g. not a lambda or plain function. |
-| @ClassMethod@ | A method defined using teh @classmethod@ decorator. |
+| @ClassMethod@ | A method defined using the @classmethod@ decorator. |
 | @StaticMethod@ | A method defined using the @staticmethod@ decorator. |
 
 
