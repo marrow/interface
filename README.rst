@@ -49,7 +49,7 @@ of implicit API suffers from a small set of rather significant problems:
   from the last place you had anything to do with a given object.
 
 * You have to handle all sorts of errors: ``AttributeError``, ``TypeError``, and possibly others like ``ValueError``
-  and ``NotImplementedError``.  This makes exception handling for exceptions you _expect_ a given API to generate more
+  and ``NotImplementedError``.  This makes exception handling for exceptions you *expect* a given API to generate more
   difficult, especially considering that raw except blocks (exception handlers that catch anything) are just as likely
   to eat real exceptions raised by bugs or incompatible data.
 
@@ -96,8 +96,8 @@ To continue the analogy, consider this conversation:
 * Boyfriend: "I can do that."
 
 Zope Interface (``z.i``) suffers from all the same problems, except for the subclassing issue.  In ``z.i`` you execute
-function calls at the class scope to _register_ your adherence to an interface.  Zope Interface also has a clear
-distinction between class-level implementation of a protocol, and objects which _provide_ the interface.
+function calls at the class scope to *register* your adherence to an interface.  Zope Interface also has a clear
+distinction between class-level implementation of a protocol, and objects which *provide* the interface.
 
 
 
@@ -125,7 +125,7 @@ Development takes place on `GitHub <https://github.com/>`_ in the
 are provided there.
 
 Installing the current development version requires `Git <http://git-scm.com/>`_, a distributed source code management
-system.  If you have Git, you can run the following to download and _link_ the development version into your Python
+system.  If you have Git, you can run the following to download and *link* the development version into your Python
 runtime::
 
     git clone https://github.com/marrow/marrow.interface.git
