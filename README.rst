@@ -118,6 +118,8 @@ get bugfixes and feature updates, but ensure that large breaking changes are not
 2.1. Development Version
 ------------------------
 
+    |developstatus| |developcover|
+
 Development takes place on `GitHub <https://github.com/>`_ in the
 `marrow.interface <https://github.com/marrow/marrow.interface>`_ project.  Issue tracking, documentation, and downloads
 are provided there.
