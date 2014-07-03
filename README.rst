@@ -269,11 +269,11 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
 
 .. |masterstatus| image:: http://img.shields.io/travis/marrow/marrow.interface/master.svg?style=flat
-    :target: https://travis-ci.org/marrow/marrow.schema
+    :target: https://travis-ci.org/marrow/marrow.interface
     :alt: Release Build Status
 
 .. |developstatus| image:: http://img.shields.io/travis/marrow/marrow.interface/develop.svg?style=flat
-    :target: https://travis-ci.org/marrow/marrow.schema
+    :target: https://travis-ci.org/marrow/marrow.interface
     :alt: Development Build Status
 
 .. |latestversion| image:: http://img.shields.io/pypi/v/marrow.interface.svg?style=flat
