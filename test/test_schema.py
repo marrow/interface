@@ -3,6 +3,7 @@
 """Test the schema objects."""
 
 from unittest import TestCase
+from collections import UserDict
 
 from marrow.interface import schema
 
@@ -159,7 +160,7 @@ class TestCallableBasics(TestCase, BaseCallables):
     bad = schema.Callable()
     bad.name = 'foo'
     
-    dictionary = dict()
+    dictionary = UserDict()
     
     error = schema.Callable()
     error.name = '__getitem__'
