@@ -160,7 +160,7 @@ class TestCallableBasics(TestCase, BaseCallables):
     bad = schema.Callable()
     bad.name = 'foo'
     
-    dictionary = UserDict()
+    notdictionary = object()
     
     error = schema.Callable()
     error.name = '__getitem__'
@@ -172,7 +172,7 @@ class TestCallableBasics(TestCase, BaseCallables):
         self.assertFalse(self.bad(self))
     
     def test_callable_introspect_fail(self):
-        self.assertFalse(self.error(self.dictionary))
+        self.assertFalse(self.error(self.notdictionary))
 
 
 class TestCallableArgspecSuccess(TestCase, BaseCallables):
