@@ -31,7 +31,6 @@ https://github.com/marrow/marrow.interface""",
         license = "MIT",
 
         install_requires = [
-            'marrow.util < 2.0'
         ],
 
         test_suite = 'nose.collector',
