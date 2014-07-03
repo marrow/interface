@@ -3,7 +3,6 @@
 """Test the schema objects."""
 
 from unittest import TestCase
-from collections import UserDict
 
 from marrow.interface import schema
 
