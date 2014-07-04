@@ -2,7 +2,7 @@
 Marrow Interface
 ================
 
-    © 2011, Alice Bevan-McGregor and contributors.
+    © 2011-2014, Alice Bevan-McGregor and contributors.
 
 ..
 
