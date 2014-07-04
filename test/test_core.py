@@ -19,7 +19,7 @@ class TestInterface(TestCase):
         class IUniversal(Interface):
             pass
         
-        self.assertEquals(IUniversal.__abstract__, {})
+        self.assertEquals(IUniversal.__attributes__, {})
     
     def test_interface_subclassing(self):
         class IGetter(Interface):
@@ -28,11 +28,11 @@ class TestInterface(TestCase):
         class IGetterSetter(IGetter):
             __setitem__ = schema.Method(args=2)
         
-        self.assertEquals(IGetter.__abstract__, dict(
+        self.assertEquals(IGetter.__attributes__, dict(
                 __getitem__=IGetter.__getitem__)
             )
         
-        self.assertEquals(IGetterSetter.__abstract__, dict(
+        self.assertEquals(IGetterSetter.__attributes__, dict(
                 __getitem__ = IGetter.__getitem__,
                 __setitem__ = IGetterSetter.__setitem__
             ))
@@ -42,38 +42,7 @@ class TestInterface(TestCase):
             class IBadInterface(Interface, object):
                 pass
     
-    def test_conflicting_interfaces(self):
-        class IGetter(Interface):
-            __getitem__ = schema.Method(args=1)
-        
-        with self.assertRaises(TypeError):
-            class IGetterSetter(IGetter):
-                __getitem__ = schema.Method(args=2)
-                __setitem__ = schema.Method(args=2)
-    
     def test_concrete_interface(self):
         with self.assertRaises(TypeError):
             class IConcrete(Interface):
                 foo = 27
-
-
-class TestExampleInterface(TestCase):
-    def setUp(self):
-        from marrow.interface.base import IMapping
-        
-        self.interface = IMapping
-    
-    def test_core_type_comparison(self):
-        self.assertTrue(isinstance(dict, self.interface))
-    
-    def test_core_instance_comparison(self):
-        self.assertTrue(isinstance(dict(), self.interface))
-    
-    def test_user_type_comparison(self):
-        self.assertTrue(isinstance(UserDict, self.interface))
-    
-    def test_user_instance_comparison(self):
-        self.assertTrue(isinstance(UserDict(), self.interface))
-    
-    def test_failure(self):
-        self.assertFalse(isinstance(object(), self.interface))

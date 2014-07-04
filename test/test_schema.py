@@ -11,24 +11,21 @@ from marrow.interface import schema
 class TestAttributeSuccesses(TestCase):
     foo = 27
     
-    basic = schema.Attribute("basic attribute")
-    basic.name = 'basic'
+    basic = schema.Attribute()
+    basic.__name__ = 'basic'
     
     value = schema.Attribute(value=27)
-    value.name = 'foo'
+    value.__name__ = 'foo'
     
     exact = schema.Attribute()
-    exact.name = 'exact'
+    exact.__name__ = 'exact'
     exact.exact = exact
     
     validator = schema.Attribute(validator=lambda v: 20 < v < 30)
-    validator.name = 'foo'
+    validator.__name__ = 'foo'
     
     def test_basic_repr(self):
         self.assertEqual(repr(self.basic), "Attribute(basic)")
-    
-    def test_basic_docstring(self):
-        self.assertEqual(self.basic.__doc__, "basic attribute")
     
     def test_basic_call(self):
         self.assertTrue(self.basic(self))
@@ -47,17 +44,17 @@ class TestAttributeFailure(TestCase):
     foo = 42
     
     basic = schema.Attribute()
-    basic.name = 'bar'
+    basic.__name__ = 'bar'
     
     value = schema.Attribute(value=27)
-    value.name = 'foo'
+    value.__name__ = 'foo'
     
     exact = schema.Attribute()
-    exact.name = 'exact'
+    exact.__name__ = 'exact'
     exact.exact = None
     
     validator = schema.Attribute(validator=lambda v: 20 < v < 30)
-    validator.name = 'foo'
+    validator.__name__ = 'foo'
     
     def test_basic_call(self):
         self.assertFalse(self.basic(self))
@@ -77,10 +74,10 @@ class TestProperty(TestCase):
     bar = "baz"
     
     good = schema.Property(type=int)
-    good.name = 'foo'
+    good.__name__ = 'foo'
     
     bad = schema.Property(type=int)
-    bad.name = 'bar'
+    bad.__name__ = 'bar'
     
     def test_property_success(self):
         self.assertTrue(self.good(self))
@@ -93,10 +90,10 @@ class TestClassProperty(TestCase):
     foo = 27
     
     good = schema.ClassProperty()
-    good.name = 'foo'
+    good.__name__ = 'foo'
     
     bad = schema.ClassProperty()
-    bad.name = 'bar'
+    bad.__name__ = 'bar'
     
     def __init__(self, *args, **kw):
         super(TestClassProperty, self).__init__(*args, **kw)
@@ -114,13 +111,13 @@ class TestInstanceProperty(TestCase):
     bar = 42
     
     good1 = schema.InstanceProperty()
-    good1.name = 'bar'
+    good1.__name__ = 'bar'
     
     good2 = schema.InstanceProperty()
-    good2.name = 'baz'
+    good2.__name__ = 'baz'
     
     bad = schema.InstanceProperty()
-    bad.name = 'foo'
+    bad.__name__ = 'foo'
     
     def __init__(self, *args, **kw):
         super(TestInstanceProperty, self).__init__(*args, **kw)
@@ -154,15 +151,15 @@ class BaseCallables(object):
 
 class TestCallableBasics(TestCase, BaseCallables):
     good = schema.Callable()
-    good.name = 'callable1'
+    good.__name__ = 'callable1'
     
     bad = schema.Callable()
-    bad.name = 'foo'
+    bad.__name__ = 'foo'
     
     notdictionary = object()
     
     error = schema.Callable()
-    error.name = '__getitem__'
+    error.__name__ = '__getitem__'
     
     def test_callable_base_success(self):
         self.assertTrue(self.good(self))
@@ -180,22 +177,22 @@ class TestCallableArgspecSuccess(TestCase, BaseCallables):
     args = schema.Callable(args=1)
     optional = schema.Callable(optional=1)
     names = schema.Callable(names=('arg1', 'arg2'))
-    args.name = optional.name = names.name = 'callable1'
+    args.__name__ = optional.__name__ = names.__name__ = 'callable1'
     args.skip = optional.skip = names.skip = 1
     
     vargs = schema.Callable(vargs=True)
     kwargs = schema.Callable(kwargs=True)
-    vargs.name = kwargs.name = 'callable2'
+    vargs.__name__ = kwargs.__name__ = 'callable2'
     vargs.skip = kwargs.skip = 1
     
     like_basic = schema.Callable(like=BaseCallables.callable1)
-    like_basic.name = 'callable1'
+    like_basic.__name__ = 'callable1'
     
     like_variable = schema.Callable(like=BaseCallables.callable2)
-    like_variable.name = 'callable2'
+    like_variable.__name__ = 'callable2'
     
     like_override = schema.Callable(like=BaseCallables.callable1, args=2)
-    like_override.name = 'callable1'
+    like_override.__name__ = 'callable1'
     
     def test_callable_args(self):
         self.assertTrue(self.args(self))
@@ -228,19 +225,19 @@ class TestCallableArgspecFailures(TestCase, BaseCallables):
     args = schema.Callable(args=1)
     optional = schema.Callable(optional=1)
     names = schema.Callable(names=('arg1', 'arg2'))
-    args.name = optional.name = names.name = 'callable2'
+    args.__name__ = optional.__name__ = names.__name__ = 'callable2'
     args.skip = optional.skip = names.skip = 1
     
     vargs = schema.Callable(vargs=True)
     kwargs = schema.Callable(kwargs=True)
-    vargs.name = kwargs.name = 'callable1'
+    vargs.__name__ = kwargs.__name__ = 'callable1'
     vargs.skip = kwargs.skip = 1
     
     like_basic = schema.Callable(like=BaseCallables.callable1)
-    like_basic.name = 'callable2'
+    like_basic.__name__ = 'callable2'
     
     like_variable = schema.Callable(like=BaseCallables.callable2)
-    like_variable.name = 'callable1'
+    like_variable.__name__ = 'callable1'
     
     def test_callable_args(self):
         self.assertFalse(self.args(self))
@@ -266,13 +263,13 @@ class TestCallableArgspecFailures(TestCase, BaseCallables):
 
 class TestMethod(TestCase, BaseCallables):
     good1 = schema.Method()
-    good1.name = 'callable1'
+    good1.__name__ = 'callable1'
     
     good2 = schema.Method()
-    good2.name = 'callable1'
+    good2.__name__ = 'callable1'
     
     bad = schema.Method()
-    bad.name = 'callable3'
+    bad.__name__ = 'callable3'
     
     def test_method_success(self):
         self.assertTrue(self.good1(self))
@@ -286,13 +283,13 @@ class TestMethod(TestCase, BaseCallables):
 
 class TestClassMethod(TestCase, BaseCallables):
     good = schema.ClassMethod()
-    good.name = 'callable2'
+    good.__name__ = 'callable2'
     
     bad1 = schema.ClassMethod()
-    bad1.name = 'callable1'
+    bad1.__name__ = 'callable1'
     
     bad2 = schema.ClassMethod()
-    bad2.name = 'callable3'
+    bad2.__name__ = 'callable3'
     
     def test_class_method_success(self):
         self.assertTrue(self.good(self))
@@ -306,16 +303,16 @@ class TestClassMethod(TestCase, BaseCallables):
 
 class TestStaticMethod(TestCase, BaseCallables):
     good = schema.StaticMethod()
-    good.name = 'callable3'
+    good.__name__ = 'callable3'
     
     bad1 = schema.StaticMethod()
-    bad1.name = 'callable1'
+    bad1.__name__ = 'callable1'
     
     bad2 = schema.StaticMethod()
-    bad2.name = 'callable2'
+    bad2.__name__ = 'callable2'
     
     invalid = schema.StaticMethod(args=1)
-    invalid.name = 'callable3'
+    invalid.__name__ = 'callable3'
     
     def test_static_method_success(self):
         self.assertTrue(self.good(self))
