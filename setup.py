@@ -72,6 +72,7 @@ setup(
 	namespace_packages = ['marrow'],
 	
 	install_requires=[
+			'marrow.schema',
 		],
 	
 	extras_require = dict(
