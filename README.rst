@@ -61,7 +61,7 @@ Most of the `rationale behind Abstract Base Classes <http://www.python.org/dev/p
 
 As a rather off-colour analogy, consider this conversation:
 
-* Boyfriend: "We're going to have sex!"
+* Boyfriend: "We're going to have fun!"
 
 * Girlfriend: "No we're not."
 
@@ -89,9 +89,9 @@ Abstract Base Classes (ABCs) offer a registry in addition to subclass-based memb
 
 To continue the analogy, consider this conversation:
 
-* Boyfriend: "I'd like to have sex!"
+* Boyfriend: "I'd like to have fun!"
 
-* Girlfriend: "Could we have sex?"
+* Girlfriend: "Could we have fun?"
 
 * Boyfriend: "I can do that."
 
