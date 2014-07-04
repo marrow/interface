@@ -10,7 +10,7 @@ Marrow Interface
 
 ..
 
-    |latestversion| |masterstatus| |mastercover| |issuecount|
+    |latestversion| |downloads| |masterstatus| |mastercover| |issuecount|
 
 1. What is Marrow Interface?
 ============================
@@ -279,6 +279,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 .. |latestversion| image:: http://img.shields.io/pypi/v/marrow.interface.svg?style=flat
     :target: https://pypi.python.org/pypi/marrow.interface
     :alt: Latest Version
+
+.. |downloads| image:: http://img.shields.io/pypi/dw/marrow.interface.svg?style=flat
+    :target: https://pypi.python.org/pypi/marrow.interface
+    :alt: Downloads per Week
 
 .. |mastercover| image:: http://img.shields.io/coveralls/marrow/marrow.interface/master.svg?style=flat
     :target: https://travis-ci.org/marrow/marrow.interface
