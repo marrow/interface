@@ -1,3 +1,3 @@
 # encoding: utf-8
 
-from marrow.interface.core import Interface
+from .meta import Interface

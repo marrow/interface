@@ -2,38 +2,27 @@
 
 import inspect
 
-__all__ = [
-		'Attribute',
-		'Property', 'ClassProperty', 'InstanceProperty',
-		'Method', 'ClassMethod', 'StaticMethod'
-	]
+from marrow.schema import Container, Attribute as Setting
+from marrow.schema.declarative import nil
 
 
-
-class NoDefault(object):
-	pass
+undefined = object()
 
 
-class Attribute(object):
-	def __repr__(self):
-		return "%s(%s)" % (self.__class__.__name__, self.name)
+class Attribute(Container):
+	value = Setting(default=undefined)
+	exact = Setting(default=undefined)
+	validator = Setting(default=None)
 	
-	# Note: do not use value and exact positionally; they should be keyword only.
-	def __init__(self, doc=None, value=NoDefault, exact=NoDefault, validator=None):
-		if doc is not None:
-			self.__doc__ = doc
-		
-		self.name = None
-		self.value = value
-		self.exact = exact
-		self.validator = validator
+	def __repr__(self):
+		return "%s(%s)" % (self.__class__.__name__, self.__name__)
 	
 	def __call__(self, instance):
-		value = getattr(instance, self.name, NoDefault)
+		value = getattr(instance, self.__name__, nil)
 		
-		if ( value is NoDefault ) or \
-			( self.value is not NoDefault and value != self.value ) or \
-			( self.exact is not NoDefault and value is not self.exact ) or \
+		if ( value is nil or value is undefined ) or \
+			( self.value is not undefined and value != self.value ) or \
+			( self.exact is not undefined and value is not self.exact ) or \
 			( self.validator and not self.validator(value) ) or \
 			( not self.check(instance, value) ):
 			return False
@@ -46,10 +35,7 @@ class Attribute(object):
 
 
 class Property(Attribute):
-	def __init__(self, doc=None, type=None, **kw):
-		super(Property, self).__init__(doc, **kw)
-		
-		self.type = type
+	type = Setting(default=None)
 	
 	def check(self, instance, value):
 		if not super(Property, self).check(instance, value) or \
@@ -62,8 +48,8 @@ class Property(Attribute):
 class ClassProperty(Property):
 	def check(self, instance, value):
 		if not super(ClassProperty, self).check(instance, value) or \
-			self.name in instance.__dict__ or \
-			self.name not in (attr for cls in type(instance).mro() for attr in cls.__dict__):
+			self.__name__ in instance.__dict__ or \
+			self.__name__ not in (attr for cls in type(instance).mro() for attr in cls.__dict__):
 			return
 		
 		return True
@@ -72,7 +58,7 @@ class ClassProperty(Property):
 class InstanceProperty(Property):
 	def check(self, instance, value):
 		if not super(InstanceProperty, self).check(instance, value) or \
-			self.name not in instance.__dict__:
+			self.__name__ not in instance.__dict__:
 			return
 		
 		return True
@@ -81,20 +67,36 @@ class InstanceProperty(Property):
 class Callable(Attribute):
 	skip = 0
 	
-	def __init__(self, doc=None, like=None, args=None, optional=None, names=None, vargs=None, kwargs=None, **kw):
-		super(Callable, self).__init__(doc, **kw)
+	args = Setting(default=None)
+	optional = Setting(default=None)
+	names = Setting(default=None)
+	vargs = Setting(default=None)
+	kwargs = Setting(default=None)
+	
+	def __init__(self, *args, **kw):
+		if 'like' in kw:
+			like = kw.pop('like')
+		elif args:
+			args = list(args)
+			like = args.pop(0)
+		else:
+			like = None
+		
+		super(Callable, self).__init__(*args, **kw)
 		
 		if like:
 			names_, vargs, kwargs, defaults = inspect.getargspec(like)
-			optional = optional if optional else (len(defaults) if defaults else None)
-			args = args if args is not None and names is None else (len(names_) - self.skip - (optional if optional is not None else 0))
-			names = names if names is not None else names_[self.skip:]
+			
+			if not self.optional:
+				self.optional = len(defaults) if defaults else None
+			
+			if not self.args and self.names is not None:
+				self.args = len(names_) - self.skip - (self.optional or 0)
+			
+			if not self.names:
+				self.names = names_[self.skip:]
 		
-		self.args = args
-		self.optional = optional
-		self.names = set(names) if names else None
-		self.vargs = vargs
-		self.kwargs = kwargs
+		self.names = set(self.names) if self.names else None
 	
 	def check(self, instance, value):
 		if not super(Callable, self).check(instance, value) or \
@@ -142,8 +144,8 @@ class ClassMethod(Method):
 		mro = (instance if inspect.isclass(instance) else type(instance)).mro()
 		
 		for cls in mro:
-			if self.name in cls.__dict__:
-				if type(cls.__dict__[self.name]) is classmethod:
+			if self.__name__ in cls.__dict__:
+				if type(cls.__dict__[self.__name__]) is classmethod:
 					return True
 
 
@@ -153,8 +155,8 @@ class StaticMethod(Callable):
 			return
 		
 		for cls in (instance if inspect.isclass(instance) else type(instance)).mro():
-			if self.name in cls.__dict__:
-				if type(cls.__dict__[self.name]) is staticmethod:
+			if self.__name__ in cls.__dict__:
+				if type(cls.__dict__[self.__name__]) is staticmethod:
 					return True
 				
 				break
