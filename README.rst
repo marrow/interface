@@ -259,14 +259,14 @@ Version 1.0.1
 Version 2.0
 -----------
 
-* Rewritten to use `marrow.schema` for the declarative syntax.
+* Refactored to use `Marrow Schema <https://github.com/marrow/marrow.schema>`_ for the declarative syntax.
 
 * Full test coverage and expanded test capability with improved `Travis-CI <https://travis-ci.org>`_ integration and
   use of `Tox <https://pypi.python.org/pypi/tox>`_.
 
-* Use of `__assume_interface__` is deprecated; this attribute is now called `__assume__`.
+* Use of ``__assume_interface__`` is deprecated; this attribute is now called ``__assume__``.
 
-* The ability to define `__doc__` docstrings for each schema element has been removed.
+* The ability to define ``__doc__`` docstrings for each schema element has been removed.
 
 
 5. License
