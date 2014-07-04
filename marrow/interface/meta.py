@@ -3,7 +3,8 @@
 from inspect import isclass
 
 from marrow.schema.meta import ElementMeta
-from marrow.interface.schema import Attribute
+
+from .schema import Attribute
 
 
 __all__ = ['InterfaceMeta', 'Interface']
@@ -19,7 +20,8 @@ class InterfaceMeta(ElementMeta):
 	
 	def __new__(meta, name, bases, attrs):
 		# Handle the initial Interface class, which defines no interfaces.
-		if len(bases) == 1 and bases[0] is object:
+		print(bases)
+		if bases == (object, ):
 			return ElementMeta.__new__(meta, name, bases, attrs)
 		
 		# Interfaces have additional restrictions.
@@ -45,19 +47,15 @@ class InterfaceMeta(ElementMeta):
 		return cls.implements(inst)
 	
 	def implements(interface, instance):
-		assumptions = getattr(interface, '__assume_interface__', [])
+		assumptions = getattr(interface, '__assume__', getattr(interface, '__assume_interface__', []))
 		
-		if isclass(instance):
-			for assumption in assumptions:
-				if issubclass(instance, assumption):
-					return True
+		if isclass(instance) and issubclass(instance, tuple(assumptions)):
+			return True
 		
-		else:
-			for assumption in assumptions:
-				if isinstance(instance, assumption):
-					return True
+		elif isinstance(instance, tuple(assumptions)):
+			return True
 		
-		for i, j in interface.__abstract__.items():
+		for i, j in interface.__attributes__.items():
 			if not j(instance):
 				return False
 		
