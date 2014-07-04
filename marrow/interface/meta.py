@@ -9,7 +9,7 @@ from .schema import Attribute
 
 __all__ = ['InterfaceMeta', 'Interface']
 
-ALLOWED_PROPERTIES = ('__doc__', '__module__', '__assume__', '__assume_interface__', '__qualname__', '__sequence__')
+ALLOWED_PROPERTIES = ('__doc__', '__module__', '__assume__', '__assume_interface__', '__qualname__', '__sequence__', '__locals__')
 
 
 class InterfaceMeta(ElementMeta):
