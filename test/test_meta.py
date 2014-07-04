@@ -2,15 +2,7 @@
 
 """Test the schema objects."""
 
-from unittest import TestCase
-
 from marrow.interface import Interface, schema
-
-try:
-	from collections import UserDict
-
-except ImportError:
-	from UserDict import UserDict
 
 
 class MockAttribute(schema.Attribute):
@@ -23,12 +15,12 @@ class MockAttribute(schema.Attribute):
 		return hasattr(inst,self.__name__)
 
 
-class TestInterface(TestCase):
+class TestInterface:
 	def test_interface_creation(self):
 		class IUniversal(Interface):
 			pass
 		
-		self.assertEquals(IUniversal.__attributes__, {})
+		assert IUniversal.__attributes__ == {}
 	
 	def test_interface_subclassing(self):
 		class IGetter(Interface):
@@ -37,24 +29,28 @@ class TestInterface(TestCase):
 		class IGetterSetter(IGetter):
 			__setitem__ = schema.Method(args=2)
 		
-		self.assertEquals(IGetter.__attributes__, dict(
-				__getitem__=IGetter.__getitem__)
+		assert IGetter.__attributes__ == dict(
+				__getitem__=IGetter.__getitem__
 			)
 		
-		self.assertEquals(IGetterSetter.__attributes__, dict(
+		assert IGetterSetter.__attributes__ == dict(
 				__getitem__ = IGetter.__getitem__,
 				__setitem__ = IGetterSetter.__setitem__
-			))
+			)
 	
 	def test_bad_interface(self):
-		with self.assertRaises(TypeError):
+		try:
 			class IBadInterface(Interface, object):
 				pass
+		except TypeError:
+			pass
 	
 	def test_concrete_interface(self):
-		with self.assertRaises(TypeError):
+		try:
 			class IConcrete(Interface):
 				foo = 27
+		except TypeError:
+			pass
 	
 	def test_check(self):
 		class IRig(Interface):
