@@ -20,7 +20,6 @@ class InterfaceMeta(ElementMeta):
 	
 	def __new__(meta, name, bases, attrs):
 		# Handle the initial Interface class, which defines no interfaces.
-		print(bases)
 		if bases == (object, ):
 			return ElementMeta.__new__(meta, name, bases, attrs)
 		
