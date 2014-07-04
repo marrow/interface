@@ -268,6 +268,8 @@ Version 2.0
 
 * The ability to define ``__doc__`` docstrings for each schema element has been removed.
 
+* Wheel distribution.
+
 
 5. Contributors
 ===============
