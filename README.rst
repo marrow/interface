@@ -164,13 +164,13 @@ utilize the declarative schema objects.  For example::
     from marrow.interface.schema import Method
     
     class IMapping(Interface):
-        __assume_interface__ = (dict,)
+        __assume__ = (dict,)
         __getitem__ = Method(args=1)
         __setitem__ = Method(args=2)
         __delitem__ = Method(args=1)
 
-The ``__assume_interface__`` attribute of an ``Interface`` allows you to define an interface that accepts built-in
-types that can not be introspected.
+The ``__assume__`` attribute of an ``Interface`` allows you to define an interface that accepts built-in types that can
+not be introspected.
 
 
 3.2. Schema
@@ -243,13 +243,39 @@ Class             Description
 ================  ================================================================================
 
 
-8. License
+4. Version History
+==================
+
+Version 1.0
+-----------
+
+* Initial release.
+
+Version 1.0.1
+-------------
+
+* Corrected issue with Python 3.3, see `issue #2 <https://github.com/marrow/marrow.interface/pull/2>`_.
+
+Version 2.0
+-----------
+
+* Rewritten to use `marrow.schema` for the declarative syntax.
+
+* Full test coverage and expanded test capability with improved `Travis-CI <https://travis-ci.org>`_ integration and
+  use of `Tox <https://pypi.python.org/pypi/tox>`_.
+
+* Use of `__assume_interface__` is deprecated; this attribute is now called `__assume__`.
+
+* The ability to define `__doc__` docstrings for each schema element has been removed.
+
+
+5. License
 ==========
 
 Marrow Interface has been released under the MIT Open Source license.
 
 
-8.1. The MIT License
+5.1. The MIT License
 --------------------
 
 Copyright © 2011-2014 Alice Bevan-McGregor and contributors.
