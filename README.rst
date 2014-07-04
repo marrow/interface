@@ -269,13 +269,20 @@ Version 2.0
 * The ability to define ``__doc__`` docstrings for each schema element has been removed.
 
 
-5. License
+5. Contributors
+===============
+
+* `Alice Bevan-McGregor <https://github.com/amcgregor>`_
+* `Nando Florestan <https://github.com/nandoflorestan>`_
+
+
+6. License
 ==========
 
 Marrow Interface has been released under the MIT Open Source license.
 
 
-5.1. The MIT License
+6.1. The MIT License
 --------------------
 
 Copyright © 2011-2014 Alice Bevan-McGregor and contributors.
