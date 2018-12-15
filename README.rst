@@ -2,11 +2,11 @@
 Marrow Interface
 ================
 
-    © 2011-2014, Alice Bevan-McGregor and contributors.
+    © 2011-2018, Alice Bevan-McGregor and contributors.
 
 ..
 
-    https://github.com/marrow/marrow.interface
+    https://github.com/marrow/interface
 
 ..
 
@@ -287,7 +287,7 @@ Marrow Interface has been released under the MIT Open Source license.
 6.1. The MIT License
 --------------------
 
-Copyright © 2011-2014 Alice Bevan-McGregor and contributors.
+Copyright © 2011-2018 Alice Bevan-McGregor and contributors.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the “Software”), to deal in the Software without restriction, including without limitation the
@@ -327,7 +327,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     :target: https://travis-ci.org/marrow/marrow.interface
     :alt: Development Test Coverage
 
-.. |issuecount| image:: http://img.shields.io/github/issues/marrow/marrow.interface.svg?style=flat
+.. |issuecount| image:: http://img.shields.io/github/issues/marrow/interface.svg?style=flat
     :target: https://github.com/marrow/marrow.interface/issues
     :alt: Github Issues
 
