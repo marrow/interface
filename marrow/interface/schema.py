@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 import inspect
 
 from marrow.schema import Container, Attribute as Setting

@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 """Release information about Marrow Interface."""
 
 from collections import namedtuple

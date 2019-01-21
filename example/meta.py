@@ -7,8 +7,8 @@ class ILengthly(Interface):
 class MetaLengthly(type):
     def __len__(self): return 0
 
-class MyLengthly(object):
-    __metaclass__ = MetaLengthly
+class MyLengthly(metaclass=MetaLengthly):
+	pass
 
 assert len(MyLengthly) == 0
 assert isinstance(MyLengthly, ILengthly) is True
