@@ -11,4 +11,4 @@ version = ".".join([str(i) for i in version_info[:3]]) + ((version_info.releasel
 author = namedtuple('Author', ['name', 'email'])("Alice Bevan-McGregor", 'alice@gothcandy.com')
 
 description = "An anti-Pythonic declarative strict interface definition and validation system."
-url = 'https://github.com/marrow/marrow.interface/'
+url = 'https://github.com/marrow/interface/'
