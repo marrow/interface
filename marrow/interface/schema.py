@@ -3,7 +3,6 @@
 import inspect
 
 from marrow.schema import Container, Attribute as Setting
-from marrow.schema.declarative import nil
 
 
 undefined = object()
@@ -18,9 +17,9 @@ class Attribute(Container):
 		return "%s(%s)" % (self.__class__.__name__, self.__name__)
 	
 	def __call__(self, instance):
-		value = getattr(instance, self.__name__, nil)
+		value = getattr(instance, self.__name__, undefined)
 		
-		if ( value is nil or value is undefined ) or \
+		if ( value is undefined ) or \
 			( self.value is not undefined and value != self.value ) or \
 			( self.exact is not undefined and value is not self.exact ) or \
 			( self.validator and not self.validator(value) ) or \
@@ -85,7 +84,7 @@ class Callable(Attribute):
 		super(Callable, self).__init__(*args, **kw)
 		
 		if like:
-			names_, vargs, kwargs, defaults = inspect.getargspec(like)
+			names_, vargs, kwargs, defaults, *remainder = inspect.getfullargspec(like)
 			
 			if not self.optional:
 				self.optional = len(defaults) if defaults else None
@@ -104,7 +103,7 @@ class Callable(Attribute):
 			return
 		
 		try:
-			names, vargs, kwargs, defaults = inspect.getargspec(value)
+			names, vargs, kwargs, defaults, *remainder = inspect.getfullargspec(value)
 		except:
 			return
 		
