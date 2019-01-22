@@ -2,6 +2,7 @@
 Marrow Interface
 ================
 
+
     © 2011-2019, Alice Bevan-McGregor and contributors.
 
 ..
@@ -10,7 +11,7 @@ Marrow Interface
 
 ..
 
-    |latestversion| |downloads| |masterstatus| |mastercover| |issuecount|
+   |latestversion| |ghtag| |masterstatus| |mastercover| |masterreq| |ghwatch| |ghstar|
 
 .. warning:: This project is no longer Python 2 compatible, and due to the change in how namespace packages are
              packaged this project is directly incompatible with any other project utilizing the ``marrow`` namespace
@@ -122,7 +123,7 @@ get bugfixes and feature updates, but ensure that large breaking changes are not
 2.1. Development Version
 ------------------------
 
-    |developstatus| |developcover|
+    |developstatus| |developcover| |ghsince| |issuecount| |ghfork|
 
 Development takes place on `GitHub <https://github.com/>`_ in the
 `marrow.interface <https://github.com/marrow/interface>`_ project.  Issue tracking, documentation, and downloads
@@ -133,11 +134,11 @@ system.  If you have Git, you can run the following to download and *link* the d
 runtime::
 
     git clone https://github.com/marrow/interface.git
-    (cd marrow.interface; python setup.py develop)
+    (cd interface; python setup.py develop)
 
 You can upgrade to the latest version at any time::
 
-    (cd marrow.interface; git pull; python setup.py develop)
+    (cd interface; git pull; python setup.py develop)
 
 If you would like to make changes and contribute them back to the project, fork the GitHub project, make your changes,
 and submit a pull request.  This process is beyond the scope of this documentation; for more information, see
@@ -308,6 +309,18 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER I
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
+.. |ghwatch| image:: https://img.shields.io/github/watchers/marrow/interface.svg?style=social&label=Watch
+    :target: https://github.com/marrow/interface/subscription
+    :alt: Subscribe to project activity on Github.
+
+.. |ghstar| image:: https://img.shields.io/github/stars/marrow/interface.svg?style=social&label=Star
+    :target: https://github.com/marrow/interface/subscription
+    :alt: Star this project on Github.
+
+.. |ghfork| image:: https://img.shields.io/github/forks/marrow/interface.svg?style=social&label=Fork
+    :target: https://github.com/marrow/interface/fork
+    :alt: Fork this project on Github.
+
 .. |masterstatus| image:: http://img.shields.io/travis/marrow/interface/master.svg?style=flat
     :target: https://travis-ci.org/marrow/interface
     :alt: Release Build Status
@@ -324,13 +337,29 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     :target: https://pypi.python.org/pypi/marrow.interface
     :alt: Downloads per Week
 
-.. |mastercover| image:: http://img.shields.io/coveralls/marrow/interface/master.svg?style=flat
-    :target: https://travis-ci.org/marrow/interface
+.. |mastercover| image:: http://img.shields.io/codecov/c/github/marrow/interface/master.svg?style=flat
+    :target: https://codecov.io/github/marrow/interface?branch=master
     :alt: Release Test Coverage
 
-.. |developcover| image:: http://img.shields.io/coveralls/marrow/interface/develop.svg?style=flat
-    :target: https://travis-ci.org/marrow/interface
+.. |masterreq| image:: https://img.shields.io/requires/github/marrow/interface.svg
+    :target: https://requires.io/github/marrow/interface/requirements/?branch=master
+    :alt: Status of release dependencies.
+
+.. |developcover| image:: http://img.shields.io/codecov/c/github/marrow/interface/develop.svg?style=flat
+    :target: https://codecov.io/github/marrow/interface?branch=develop
     :alt: Development Test Coverage
+
+.. |developreq| image:: https://img.shields.io/requires/github/marrow/interface.svg
+    :target: https://requires.io/github/marrow/interface/requirements/?branch=develop
+    :alt: Status of development dependencies.
+
+.. |ghsince| image:: https://img.shields.io/github/commits-since/marrow/interface/2.0.0.svg
+    :target: https://github.com/marrow/interface/commits/develop
+    :alt: Changes since last release.
+
+.. |ghtag| image:: https://img.shields.io/github/tag/marrow/interface.svg
+    :target: https://github.com/marrow/interface/tree/2.0.0
+    :alt: Latest Github tagged release.
 
 .. |issuecount| image:: http://img.shields.io/github/issues/marrow/interface.svg?style=flat
     :target: https://github.com/marrow/interface/issues
