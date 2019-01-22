@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 from inspect import isclass
 
 from marrow.schema.meta import ElementMeta

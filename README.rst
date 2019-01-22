@@ -2,11 +2,11 @@
 Marrow Interface
 ================
 
-    © 2011-2014, Alice Bevan-McGregor and contributors.
+    © 2011-2018, Alice Bevan-McGregor and contributors.
 
 ..
 
-    https://github.com/marrow/marrow.interface
+    https://github.com/marrow/interface
 
 ..
 
@@ -121,14 +121,14 @@ get bugfixes and feature updates, but ensure that large breaking changes are not
     |developstatus| |developcover|
 
 Development takes place on `GitHub <https://github.com/>`_ in the
-`marrow.interface <https://github.com/marrow/marrow.interface>`_ project.  Issue tracking, documentation, and downloads
+`marrow.interface <https://github.com/marrow/interface>`_ project.  Issue tracking, documentation, and downloads
 are provided there.
 
 Installing the current development version requires `Git <http://git-scm.com/>`_, a distributed source code management
 system.  If you have Git, you can run the following to download and *link* the development version into your Python
 runtime::
 
-    git clone https://github.com/marrow/marrow.interface.git
+    git clone https://github.com/marrow/interface.git
     (cd marrow.interface; python setup.py develop)
 
 You can upgrade to the latest version at any time::
@@ -254,12 +254,12 @@ Version 1.0
 Version 1.0.1
 -------------
 
-* Corrected issue with Python 3.3, see `issue #2 <https://github.com/marrow/marrow.interface/pull/2>`_.
+* Corrected issue with Python 3.3, see `issue #2 <https://github.com/marrow/interface/pull/2>`_.
 
 Version 2.0
 -----------
 
-* Refactored to use `Marrow Schema <https://github.com/marrow/marrow.schema>`_ for the declarative syntax.
+* Refactored to use `Marrow Schema <https://github.com/marrow/schema>`_ for the declarative syntax.
 
 * Full test coverage and expanded test capability with improved `Travis-CI <https://travis-ci.org>`_ integration and
   use of `Tox <https://pypi.python.org/pypi/tox>`_.
@@ -287,7 +287,7 @@ Marrow Interface has been released under the MIT Open Source license.
 6.1. The MIT License
 --------------------
 
-Copyright © 2011-2014 Alice Bevan-McGregor and contributors.
+Copyright © 2011-2018 Alice Bevan-McGregor and contributors.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the “Software”), to deal in the Software without restriction, including without limitation the
@@ -303,12 +303,12 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER I
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-.. |masterstatus| image:: http://img.shields.io/travis/marrow/marrow.interface/master.svg?style=flat
-    :target: https://travis-ci.org/marrow/marrow.interface
+.. |masterstatus| image:: http://img.shields.io/travis/marrow/interface/master.svg?style=flat
+    :target: https://travis-ci.org/marrow/interface
     :alt: Release Build Status
 
-.. |developstatus| image:: http://img.shields.io/travis/marrow/marrow.interface/develop.svg?style=flat
-    :target: https://travis-ci.org/marrow/marrow.interface
+.. |developstatus| image:: http://img.shields.io/travis/marrow/interface/develop.svg?style=flat
+    :target: https://travis-ci.org/marrow/interface
     :alt: Development Build Status
 
 .. |latestversion| image:: http://img.shields.io/pypi/v/marrow.interface.svg?style=flat
@@ -319,16 +319,16 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     :target: https://pypi.python.org/pypi/marrow.interface
     :alt: Downloads per Week
 
-.. |mastercover| image:: http://img.shields.io/coveralls/marrow/marrow.interface/master.svg?style=flat
-    :target: https://travis-ci.org/marrow/marrow.interface
+.. |mastercover| image:: http://img.shields.io/coveralls/marrow/interface/master.svg?style=flat
+    :target: https://travis-ci.org/marrow/interface
     :alt: Release Test Coverage
 
-.. |developcover| image:: http://img.shields.io/coveralls/marrow/marrow.interface/develop.svg?style=flat
-    :target: https://travis-ci.org/marrow/marrow.interface
+.. |developcover| image:: http://img.shields.io/coveralls/marrow/interface/develop.svg?style=flat
+    :target: https://travis-ci.org/marrow/interface
     :alt: Development Test Coverage
 
-.. |issuecount| image:: http://img.shields.io/github/issues/marrow/marrow.interface.svg?style=flat
-    :target: https://github.com/marrow/marrow.interface/issues
+.. |issuecount| image:: http://img.shields.io/github/issues/marrow/interface.svg?style=flat
+    :target: https://github.com/marrow/interface/issues
     :alt: Github Issues
 
 .. |cake| image:: http://img.shields.io/badge/cake-lie-1b87fb.svg?style=flat

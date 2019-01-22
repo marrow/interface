@@ -12,7 +12,7 @@ class IStack(Interface):
     peek = Method(args=0)
 
 
-class Stack(object):
+class Stack:
     def __init__(self, iv=None):
         self.data = list(iv) if iv else list()
     

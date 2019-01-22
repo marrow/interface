@@ -134,7 +134,7 @@ class TestInstanceProperty(TestCase):
 		self.assertFalse(self.bad(self))
 
 
-class BaseCallables(object):
+class BaseCallables:
 	foo = "foo"
 	
 	def callable1(self, arg1, arg2=None):
