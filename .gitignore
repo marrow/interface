@@ -1,5 +1,41 @@
+# Python Bytecode
+*.py[cod]
+
+# C Extensions
+*.so
+
+# Packaging
 *.egg-info
-*.pyc
+.eggs
+.packaging
+third-party
+
+# Virtual Environment Pseudo-Chroot
+.venv
+bin
+include
+lib
+share
+tmp
+usr
+var
+
+# Unit Test / Coverage Reports
+.cache
+.cagoule.db
 .coverage
-build
-dist
+.tox
+.pytest_cache
+coverage.xml
+htmlcov
+
+# Translations
+*.mo
+*.pot
+
+# Mac
+.DS_Store
+
+# Completion Integration
+.ropeproject
+tags
