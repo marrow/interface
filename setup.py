@@ -16,7 +16,7 @@ exec(open(os.path.join("marrow", "interface", "release.py")).read())
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-tests_require = ['pytest', 'pytest-cov']
+tests_require = ['pytest', 'pytest-cov', 'pytest-flakes', 'pytest-isort']
 
 setup(
 	name = "marrow.interface",
