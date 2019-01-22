@@ -12,6 +12,10 @@ Marrow Interface
 
     |latestversion| |downloads| |masterstatus| |mastercover| |issuecount|
 
+.. warning:: This project is no longer Python 2 compatible, and due to the change in how namespace packages are
+             packaged this project is directly incompatible with any other project utilizing the ``marrow`` namespace
+             that **is** compatible with Python 2. *Always pin your version ranges.*
+
 1. What is Marrow Interface?
 ============================
 
@@ -259,10 +263,11 @@ Version 1.0.1
 Version 2.0
 -----------
 
+* Removed Python 2 compatibility and testing.
+
 * Refactored to use `Marrow Schema <https://github.com/marrow/schema>`_ for the declarative syntax.
 
-* Full test coverage and expanded test capability with improved `Travis-CI <https://travis-ci.org>`_ integration and
-  use of `Tox <https://pypi.python.org/pypi/tox>`_.
+* Full test coverage and expanded test capability with improved `Travis-CI <https://travis-ci.org>`_ integration.
 
 * Use of ``__assume_interface__`` is deprecated; this attribute is now called ``__assume__``.
 
