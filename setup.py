@@ -1,20 +1,15 @@
 #!/usr/bin/env python3
 
-import os
-import sys
-import codecs
-
 from setuptools import setup, find_packages
+from sys import argv, version_info as python_version
+from pathlib import Path
 
-from setuptools.command.test import test as TestCommand
 
+if python_version < (3, 5):
+	raise SystemExit("Python 3.5 or later is required.")
 
-if sys.version_info < (3, 3):
-	raise SystemExit("Python 3.3 or later is required.")
-
-exec(open(os.path.join("marrow", "interface", "release.py")).read())
-
-here = os.path.abspath(os.path.dirname(__file__))
+here = Path(__file__).resolve().parent
+exec((here / "marrow" / "interface" / "release.py").read_text('utf-8'))
 
 tests_require = ['pytest', 'pytest-cov', 'pytest-flakes', 'pytest-isort']
 
@@ -23,7 +18,7 @@ setup(
 	version = version,
 	
 	description = description,
-	long_description = codecs.open(os.path.join(here, 'README.rst'), 'r').read(),
+	long_description = (here / 'README.rst').read_text('utf-8'),
 	url = url,
 	
 	author = author.name,
@@ -39,8 +34,6 @@ setup(
 			"Operating System :: OS Independent",
 			"Programming Language :: Python",
 			"Programming Language :: Python :: 3",
-			"Programming Language :: Python :: 3.3",
-			"Programming Language :: Python :: 3.4",
 			"Programming Language :: Python :: 3.5",
 			"Programming Language :: Python :: 3.6",
 			"Programming Language :: Python :: 3.7",
@@ -56,7 +49,7 @@ setup(
 	
 	setup_requires = [
 			'pytest-runner',
-		] if {'pytest', 'test', 'ptr'}.intersection(sys.argv) else [],
+		] if {'pytest', 'test', 'ptr'}.intersection(argv) else [],
 	
 	install_requires=[
 			'marrow.schema >= 2.0',
